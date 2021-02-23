@@ -5,15 +5,16 @@ import FormButton from '../components/FormButton';
 import FormInput from '../components/FormInput';
 import { AuthContext } from '../Navigation/AuthProvider';
 import Loading from "../components/Loading";
+import { SafeAreaView } from 'react-native';
 
-export default function Login({ navigation }) {
+const Login = ({ navigation }) => {
 
   const { login } = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  
 
   return (
+    <SafeAreaView style = {{flex:1,backgroundColor:"lightslategrey"}}>
     <View style={styles.container}>
       <Title style={styles.titleText}>Welcome to Chat app!!</Title>
       <FormInput
@@ -33,8 +34,6 @@ export default function Login({ navigation }) {
         modeValue='contained'
         labelStyle={styles.loginButtonLabel}
         onPress={() => login(email, password)}
-        
-       
       />
       <FormButton
         title='New user? Join here'
@@ -44,12 +43,13 @@ export default function Login({ navigation }) {
         onPress={() => navigation.navigate('Signup')}
       />
     </View>
+  </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'grey',
+    backgroundColor: 'darkseagreen',
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
   titleText: {
     fontSize: 30,
     marginBottom:30,
-    color: 'white'
+    color: 'blue'
   },
   loginButtonLabel: {
     fontSize: 22
@@ -66,3 +66,5 @@ const styles = StyleSheet.create({
     fontSize: 16
   }
 });
+
+export default Login;

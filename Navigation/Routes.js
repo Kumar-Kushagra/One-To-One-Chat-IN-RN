@@ -6,7 +6,7 @@ import HomeStack from './HomeStack';
 import { AuthContext } from './AuthProvider';
 import Loading from '../components/Loading';
 
-export default function Routes() {
+const Routes = () => {
   const { user, setUser } = useContext(AuthContext);
   const [loading, setLoading] = useState(true);
   const [initializing, setInitializing] = useState(true);
@@ -32,3 +32,4 @@ export default function Routes() {
     </NavigationContainer>
   );
 }
+export default Routes;

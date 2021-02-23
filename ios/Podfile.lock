@@ -236,6 +236,9 @@ PODS:
   - Firebase/Firestore (7.6.0):
     - Firebase/CoreOnly
     - FirebaseFirestore (~> 7.6.0)
+  - Firebase/Storage (7.6.0):
+    - Firebase/CoreOnly
+    - FirebaseStorage (~> 7.6.0)
   - FirebaseAuth (7.6.0):
     - FirebaseCore (~> 7.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.0)
@@ -262,6 +265,9 @@ PODS:
     - "gRPC-C++ (~> 1.28.0)"
     - leveldb-library (~> 1.22)
     - nanopb (~> 2.30907.0)
+  - FirebaseStorage (7.6.0):
+    - FirebaseCore (~> 7.0)
+    - GTMSessionFetcher/Core (~> 1.4)
   - Folly (2020.01.13.00):
     - boost-for-react-native
     - DoubleConversion
@@ -566,6 +572,10 @@ PODS:
     - Firebase/Firestore (~> 7.6.0)
     - React-Core
     - RNFBApp
+  - RNFBStorage (10.8.0):
+    - Firebase/Storage (~> 7.6.0)
+    - React-Core
+    - RNFBApp
   - RNGestureHandler (1.10.1):
     - React-Core
   - RNReanimated (1.13.2):
@@ -611,6 +621,7 @@ DEPENDENCIES:
   - "RNFBApp (from `../node_modules/@react-native-firebase/app`)"
   - "RNFBAuth (from `../node_modules/@react-native-firebase/auth`)"
   - "RNFBFirestore (from `../node_modules/@react-native-firebase/firestore`)"
+  - "RNFBStorage (from `../node_modules/@react-native-firebase/storage`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
@@ -627,6 +638,7 @@ SPEC REPOS:
     - FirebaseCore
     - FirebaseCoreDiagnostics
     - FirebaseFirestore
+    - FirebaseStorage
     - GoogleDataTransport
     - GoogleUtilities
     - "gRPC-C++"
@@ -701,6 +713,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-firebase/auth"
   RNFBFirestore:
     :path: "../node_modules/@react-native-firebase/firestore"
+  RNFBStorage:
+    :path: "../node_modules/@react-native-firebase/storage"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
   RNReanimated:
@@ -724,6 +738,7 @@ SPEC CHECKSUMS:
   FirebaseCore: 0a43b7f1c5b36f3358cd703011ca4c7e0df55870
   FirebaseCoreDiagnostics: ee1184d51da3293335b83355aad20f537acc24cf
   FirebaseFirestore: b860346d5095c741528efac94995bab39275d0bf
+  FirebaseStorage: 47890c9607e58b3046f072538c8c1ca4db2b0940
   Folly: b73c3869541e86821df3c387eb0af5f65addfab4
   glog: 40a13f7840415b9a77023fbcae0f1e6f43192af3
   GoogleDataTransport: 1024b1a4dfbd7a0e92cb20d7e0a6f1fb66b449a4
@@ -761,6 +776,7 @@ SPEC CHECKSUMS:
   RNFBApp: 97b618641633d6d23187a9d0537c3893482c483f
   RNFBAuth: 7c6c9e7289d98709cd5d1333d829925f81823375
   RNFBFirestore: 859fc78b3dc89ef10e430b39cd9f14e07ef4e158
+  RNFBStorage: e6e439c14e413f6810d304807bf7295ebe22fc7b
   RNGestureHandler: 5e58135436aacc1c5d29b75547d3d2b9430d052c
   RNReanimated: e03f7425cb7a38dcf1b644d680d1bfc91c3337ad
   RNScreens: b6c9607e6fe47c1b6e2f1910d2acd46dd7ecea3a

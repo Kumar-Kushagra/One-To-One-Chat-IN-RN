@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet} from 'react-native';
 import { Button } from 'react-native-paper';
 
-export default function FormButton({ title, modeValue, ...rest }) {
+const FormButton = ({ title, modeValue, ...rest }) => {
   return (
     <Button
       mode={modeValue}
@@ -24,3 +24,5 @@ const styles = StyleSheet.create({
     height: 50
   }
 });
+
+export default FormButton;

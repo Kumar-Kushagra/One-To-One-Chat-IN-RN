@@ -1,12 +1,12 @@
 import React, { useState, useContext } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet,SafeAreaView } from 'react-native';
 import { Title } from 'react-native-paper';
 import { AuthContext } from '../Navigation/AuthProvider';
 import FormInput from '../components/FormInput';
 import FormButton from '../components/FormButton';
 import firestore from '@react-native-firebase/firestore'
 
-export default function SignupScreen({ navigation }) {
+const SignupScreen = ({ navigation }) => {
 
   var date = new Date().getDate();
   var month = new Date().getMonth() + 1;
@@ -29,13 +29,13 @@ export default function SignupScreen({ navigation }) {
         name: name,
         createdAt: currentDate,
         email: email,
-        lastSeen: lastSeen,
+        lastSeen:lastSeen,
       })
-
     return () => unsubscribe();
   }
 
   return (
+    <SafeAreaView style = {{flex:1,backgroundColor:"lightslategrey"}}>
     <View style={styles.container}>
       <Title style={styles.titleText}>Register to chat</Title>
       <FormInput
@@ -75,20 +75,21 @@ export default function SignupScreen({ navigation }) {
         onPress={() => navigation.goBack()}
       />
     </View>
+  </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'grey',
+    backgroundColor: 'darkseagreen',
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
   },
   titleText: {
-    fontSize: 24,
-    marginBottom: 10,
-    color: 'black'
+    fontSize:30,
+    marginBottom:20,
+    color:"blue"
   },
   loginButtonLabel: {
     fontSize: 22
@@ -100,3 +101,5 @@ const styles = StyleSheet.create({
     marginTop: 10
   }
 });
+
+export default SignupScreen;

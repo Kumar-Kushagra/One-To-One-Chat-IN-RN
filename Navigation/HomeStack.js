@@ -6,8 +6,6 @@ import RoomScreen from '../screens/RoomScreen';
 import { View } from 'react-native';
 import { AuthContext } from './AuthProvider';
 
-
-
 const ChatAppStack = createStackNavigator();
 const ModalStack = createStackNavigator();
 
@@ -17,9 +15,9 @@ function ChatApp() {
     <ChatAppStack.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: '#6646ee',
+          backgroundColor:"darkslategrey",
         },
-        headerTintColor: '#ffffff',
+        headerTintColor:"white",
         headerTitleStyle: {
           fontSize: 22,
         },
@@ -52,7 +50,7 @@ function ChatApp() {
   );
 }
 
-export default function HomeStack() {
+const HomeStack = () => {
   return (
     <ModalStack.Navigator mode='modal' headerMode='none'>
       <ModalStack.Screen name='ChatApp' component={ChatApp} />
@@ -63,3 +61,4 @@ export default function HomeStack() {
     </ModalStack.Navigator>
   );
 }
+export default HomeStack;
