@@ -1,10 +1,10 @@
 import React, { useState, useContext, useEffect, useRef } from 'react';
-import {Text,StyleSheet,View,FlatList,TouchableOpacity,TextInput,Alert} from 'react-native';
+import { Text, StyleSheet, View, FlatList, TouchableOpacity, TextInput, Alert,Image} from 'react-native';
 import { AuthContext } from '../Navigation/AuthProvider';
 import firestore from '@react-native-firebase/firestore';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import moment from 'moment';
-import {launchImageLibrary } from 'react-native-image-picker';
+import { launchImageLibrary } from 'react-native-image-picker';
 import storage from '@react-native-firebase/storage';
 
 const RoomScreen = ({ route }) => {
@@ -14,14 +14,14 @@ const RoomScreen = ({ route }) => {
     const oppositeUserId = route.params.item.email;
     const [messages, setMessages] = useState("");
     const [input, setInput] = useState("")
-    
+
     const [uploading, setUploading] = useState(false);
     const [fileUri, setFileUri] = useState(null);
 
     const flatlistRef = useRef();
 
     // Storing
-    async function handleSend(message) {
+    async function handleSend(message, type) {
         const text = message
         const array1 = [currentUser.email, oppositeUserId]
         array1.sort()
@@ -33,13 +33,14 @@ const RoomScreen = ({ route }) => {
             .collection('Chat')
             .add({
                 text,
+                type,
                 createdAt: new Date().getTime(),
                 user: {
                     _id: currentUser.uid,
                     email: currentUser.email,
                 }
             })
-            setInput("");
+        setInput("");
     }
 
 
@@ -117,7 +118,7 @@ const RoomScreen = ({ route }) => {
         const url = await storage()
             .ref(filename)
             .getDownloadURL();
-        handleSend(url)
+        handleSend(url, 'image')
     };
 
     return (
@@ -130,20 +131,47 @@ const RoomScreen = ({ route }) => {
                     onContentSizeChange={() => flatlistRef.current.scrollToEnd()}
                     onLayout={() => flatlistRef.current.scrollToEnd()}
                     renderItem={(itemData) => {
-                        //console.log("itemData", itemData)
-                        return (
-                            currentUser.email == itemData.item.user.email ?
-                                <View style={styles.rightView}>
-                                    <Text style={styles.msgText}>{itemData.item.text}</Text>
-                                    <Text style={{ alignSelf: 'flex-end', color: "white", fontSize: 10 }}>{moment(itemData.item.createdAt).format('MMM D,h:mm a')} </Text>
-                                </View>
-                                :
-                                <View style={styles.leftView}>
-                                    <Text style={styles.msgText}>{itemData.item.text}</Text>
-                                    <Text style={{ alignSelf: 'flex-start', color: "white", fontSize: 10 }}>{moment(itemData.item.createdAt).format('MMM Do,h:mm a')} </Text>
-                                </View>
-                        )
-                    }}
+                        console.log("itemData", itemData)
+                        if (itemData.item.type === "text") {
+                            return (
+                                currentUser.email == itemData.item.user.email ?
+                                    <View style={styles.rightView}>
+                                        <Text style={styles.msgText}>{itemData.item.text}</Text>
+                                        <Text style={{ alignSelf: 'flex-end', color: "white", fontSize: 12}}>{moment(itemData.item.createdAt).format('MMM D,h:mm a')} </Text>
+                                    </View>
+                                    :
+                                    <View style={styles.leftView}>
+                                        <Text style={styles.msgText}>{itemData.item.text}</Text>
+                                        <Text style={{ alignSelf: 'flex-start', color: "white", fontSize: 12}}>{moment(itemData.item.createdAt).format('MMM Do,h:mm a')} </Text>
+                                    </View>
+                            )
+                        }
+                        else {
+                            return (
+                                currentUser.email == itemData.item.user.email ?
+                                    <View style={styles.rightView}>
+                                        <Image 
+                                        style = {{width:200,height:200}}
+                                            source={{
+                                                uri: itemData.item.text,
+                                            }}
+                                        />
+                                        <Text style={{fontWeight:"bold",alignSelf: 'flex-end', color: "white", fontSize: 15 }}>{moment(itemData.item.createdAt).format('MMM D,h:mm a')} </Text>
+                                    </View>
+                                    :
+                                    <View style={styles.leftView}>
+                                         <Image
+                                        style = {{width:200,height:200}}
+                                            source={{
+                                                uri: itemData.item.text,
+                                            }}
+                                        />
+                                        <Text style={{ fontWeight:"bold",alignSelf: 'flex-start', color: "white", fontSize:15}}>{moment(itemData.item.createdAt).format('MMM Do,h:mm a')} </Text>
+                                    </View>
+                            )
+                        }
+                    }
+                    }
                 />
             </View>
             <View style={styles.sendingContainer}>
@@ -154,24 +182,24 @@ const RoomScreen = ({ route }) => {
                     autoCapitalize={'none'}
                     autoCorrect={false}
                     onChangeText={(text) => setInput(text)}
-                    value = {input}
+                    value={input}
                 />
-                <TouchableOpacity onPress = {launch}>
+                <TouchableOpacity onPress={launch}>
                     <Ionicons name='image' size={30} style={styles.add} />
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => { 
+                <TouchableOpacity onPress={() => {
                     if (input.trim() === "") {
                         Alert.alert
-                        ('ERROR!!',
-                        'Please Enter Any Message');
+                            ('ERROR!!',
+                                'Please Enter Any Message');
                     }
                     else {
-                        handleSend(input);
+                        handleSend(input, "text");
                     }
                 }} >
                     <Ionicons name='send' size={30} style={styles.send} />
                 </TouchableOpacity>
-            </View>   
+            </View>
         </View>
     );
 }
@@ -190,7 +218,7 @@ const styles = StyleSheet.create({
     },
     rightView: {
         backgroundColor: "darkgreen",
-        padding: 5,
+        padding:5,
         borderRadius: 10,
         alignSelf: 'flex-end',
         alignItems: 'flex-end',
@@ -200,7 +228,7 @@ const styles = StyleSheet.create({
     },
     leftView: {
         backgroundColor: "darkslategrey",
-        padding: 5,
+        padding:5,
         borderRadius: 10,
         alignSelf: "flex-start",
         alignItems: 'flex-start',

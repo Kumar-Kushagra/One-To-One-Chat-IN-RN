@@ -1,8 +1,9 @@
 package com.firebase;
 
 import com.facebook.react.ReactActivity;
+import androidx.multidex.MultiDexApplication;import androidx.multidex.MultiDexApplication;
 
-public class MainActivity extends ReactActivity {
+public class MainApplication extends MultiDexApplication implements ReactApplication {
 
   /**
    * Returns the name of the main component registered from JavaScript. This is used to schedule
