@@ -14,7 +14,7 @@ const AuthProvider = ({ children }) => {
           try {
             await auth().signInWithEmailAndPassword(email, password);
           } catch (e) {
-            console.log(e);
+            alert(e);
           }
         },
         register: async (email, password) => {
@@ -28,7 +28,7 @@ const AuthProvider = ({ children }) => {
           try {
             await auth().signOut();
           } catch (e) {
-            console.error(e);
+            console.log(e);
           }
         }
       }}

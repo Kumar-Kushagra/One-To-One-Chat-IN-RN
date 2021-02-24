@@ -4,7 +4,6 @@ import { Title } from 'react-native-paper';
 import FormButton from '../components/FormButton';
 import FormInput from '../components/FormInput';
 import { AuthContext } from '../Navigation/AuthProvider';
-import Loading from "../components/Loading";
 import { SafeAreaView } from 'react-native';
 
 const Login = ({ navigation }) => {

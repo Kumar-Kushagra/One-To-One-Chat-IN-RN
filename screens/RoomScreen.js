@@ -9,6 +9,8 @@ import storage from '@react-native-firebase/storage';
 
 const RoomScreen = ({ route }) => {
 
+    const roomName = route.params.thread;
+
     const { user } = useContext(AuthContext);
     const currentUser = user.toJSON();
     const oppositeUserId = route.params.item.email;
@@ -46,7 +48,7 @@ const RoomScreen = ({ route }) => {
 
     // Fetching
     useEffect(() => {
-        const array1 = [currentUser.email, oppositeUserId]
+        const array1 = [currentUser.email,oppositeUserId]
         array1.sort()
         var newId = array1[0] + array1[1];
         const messagesListener = firestore()

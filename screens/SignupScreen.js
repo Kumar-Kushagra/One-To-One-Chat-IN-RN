@@ -6,7 +6,7 @@ import FormInput from '../components/FormInput';
 import FormButton from '../components/FormButton';
 import firestore from '@react-native-firebase/firestore'
 
-const SignupScreen = ({ navigation }) => {
+const SignupScreen = ({ route,navigation }) => {
 
   var date = new Date().getDate();
   var month = new Date().getMonth() + 1;
